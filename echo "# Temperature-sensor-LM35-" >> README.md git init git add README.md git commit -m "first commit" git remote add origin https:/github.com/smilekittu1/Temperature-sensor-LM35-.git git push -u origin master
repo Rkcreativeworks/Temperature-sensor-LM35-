@@ -1,0 +1,37 @@
+#include <LiquidCrystal.h>
+LiquidCrystal lcd(13, 12, 8, 7, 4, 2);
+
+int Temp;
+void setup() {
+  lcd.begin(16, 2);
+  pinMode(A0, INPUT);
+  
+}
+
+void loop() {
+  Temp = analogRead(A0);
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  
+float mv = ( Temp/1024.0)*5000; 
+float cel = mv/10;
+float farh = (cel*9)/5 + 32;
+
+Serial.print("TEMPRATURE = ");
+Serial.print(cel);
+Serial.print("*C");
+lcd.print("TEMPERATURE=");
+lcd.print(cel);
+lcd.print("*c");
+Serial.println();
+delay(1000);
+
+/* uncomment this to get temperature in farenhite 
+Serial.print("TEMPRATURE = ");
+Serial.print(farh);
+Serial.print("*F");
+Serial.println();
+
+
+*/
+}
